@@ -1,26 +1,28 @@
 <div class="row">
-    <div class="col-12 text-end">
-        <button class="btn btn-primary">Add</button>
+    <div class="col-8 offset-2 text-end">
+        <button class="btn btn-primary" [routerLink]="['/add-patient']">Add</button>
+    </div>
+    <div class="col-8 offset-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" *ngFor="let col of columns" class="text-center">{{col}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="text-center" *ngFor="let patient of patients">
+                    <td>{{patient.id}}</td>
+                    <td>{{patient.name}}</td>
+                    <td>{{patient.age}}</td>
+                    <td>{{patient.gender}}</td>
+                    <td>{{patient.address}}</td>
+                    <td>{{patient.phoneNumber}}</td>
+                    <td>
+                        <button class="btn btn-warning mx-1">Update</button>
+                        <button class="btn btn-danger mx-1" (click)="Delete(patient.id ?? 0)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
-<table class="table">
-    <thead>
-        <tr>
-            <th scope="col" *ngFor="let col of columns">{{col}}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let patient of patients">
-            <td>{{patient.id}}</td>
-            <td>{{patient.name}}</td>
-            <td>{{patient.age}}</td>
-            <td>{{patient.gender}}</td>
-            <td>{{patient.address}}</td>
-            <td>{{patient.phoneNumber}}</td>
-            <td>
-                <button class="btn btn-warning mx-1">Update</button>
-                <button class="btn btn-danger mx-1">Delete</button>
-            </td>
-        </tr>
-    </tbody>
-</table>

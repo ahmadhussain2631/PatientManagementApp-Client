@@ -10,8 +10,20 @@ export class PatientService {
   private readonly controller: string = 'Patient'
 
   constructor(private client: HttpClient) { }
-  
-  GetAll() : Observable<Patient[]>{
-    return this.client.get<Patient[]>(`${environment.apiUrl}${this.controller}/GetAll`);
+
+  private buildEndpoint(endpoint: string) {
+    return `${environment.apiUrl}${this.controller}/${endpoint}`
+  }
+
+  GetAll(): Observable<Patient[]> {
+    return this.client.get<Patient[]>(this.buildEndpoint('GetAll'));
+  }
+
+  Delete(id: number): Observable<string> {
+    return this.client.delete<string>(this.buildEndpoint(`Delete/${id}`));
+  }
+
+  Add(body: any): Observable<number> {
+    return this.client.post<number>(this.buildEndpoint(`Add`), body);
   }
 }
